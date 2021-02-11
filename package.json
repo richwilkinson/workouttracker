@@ -1,0 +1,26 @@
+{
+  "name": "workouttracker",
+  "version": "1.0.0",
+  "description": "In this assignment I was tasked with creating a workout tracker that tracks the type, length, number of repetitions and amount of weight in an individual excersise.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "logger": "^0.0.1",
+    "mongoose": "^5.11.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richwilkinson/workouttracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richwilkinson/workouttracker/issues"
+  },
+  "homepage": "https://github.com/richwilkinson/workouttracker#readme"
+}
