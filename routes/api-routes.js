@@ -3,7 +3,6 @@ const Workout = require("../models/workout.js");
 
 app.get("/api/workouts", (req, res) => {
     Workout.find({})
-    console.log(data)
     .then(data => {
         res.json(data);
     })
