@@ -2,10 +2,10 @@ module.exports = function (app) {
 const Workout = require("../models/workout.js");
 
 app.get("/api/workouts", (req, res) => {
-    Workout.find()
+    Workout.find({})
+    console.log(data)
     .then(data => {
         res.json(data);
-        console.log(data);
     })
     .catch(err => {
         res.json(err);
@@ -13,7 +13,7 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.post("/api/workouts", (req, res) => {
-    Workout.create(req.body)
+    Workout.create(data)
     .then((dbWorkout) => {
         res.json(dbWorkout);
     })
@@ -22,12 +22,12 @@ app.post("/api/workouts", (req, res) => {
     });
 });
 
-app.put("/api/workouts:id", ({body, params}, res) => {
+app.put("/api/workouts/:id", ({body, params}, res) => {
     console.log("PARAMS", params, body);
 
     Workout.findOneAndUpdate(
-        { _id: req.params.id },
-        { push: { exercises: req.body}},
+        { _id:  params.id },
+        { push: { exercises: body}},
         {new: true, runValidators: true}
     )
     .then((dbWorkout) => {
@@ -38,7 +38,7 @@ app.put("/api/workouts:id", ({body, params}, res) => {
     });
 });
 
-app.post("/api/workout/range", function (req, res){
+app.post("/api/workouts/range", function (req, res){
     Workout.create({})
     .then(data => res.json(data))
     .catch(err => {
@@ -46,7 +46,7 @@ app.post("/api/workout/range", function (req, res){
     })
 });
 
-app.get("/api/workout/range", (req, res) => {
+app.get("/api/workouts/range", (req, res) => {
     Workout.find({})
     .then(data => {
         res.send(data);
