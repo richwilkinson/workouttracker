@@ -1,10 +1,10 @@
 module.exports = function (app) {
-const Workout = require("../models/workout.js");
+const db = require("../models");
 
 app.get("/api/workouts", (req, res) => {
-    Workout.find({})
-    .then(data => {
-        res.json(data);
+    db.Workout.find({})
+    .then((dbWorkout) => {
+        res.json(dbWorkout);
     })
     .catch(err => {
         res.json(err);
@@ -12,7 +12,7 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.post("/api/workouts", (req, res) => {
-    Workout.create(data)
+    db.Workout.create(req.body)
     .then((dbWorkout) => {
         res.json(dbWorkout);
     })
@@ -22,12 +22,14 @@ app.post("/api/workouts", (req, res) => {
 });
 
 app.put("/api/workouts/:id", ({body, params}, res) => {
-    console.log("PARAMS", params, body);
+    console.log(params, body);
 
-    Workout.findOneAndUpdate(
+    //db.Workout.findOneAndUpdate(
+        db.Workout.findByIdAndUpdate(
         { _id:  params.id },
-        { push: { exercises: body}},
-        {new: true, runValidators: true}
+        { exercises: body }
+        /*{ push: { exercises: body}},
+        {new: true, runValidators: true}*/
     )
     .then((dbWorkout) => {
         res.json(dbWorkout);
@@ -38,7 +40,7 @@ app.put("/api/workouts/:id", ({body, params}, res) => {
 });
 
 app.post("/api/workouts/range", function (req, res){
-    Workout.create({})
+    db.Workout.create({})
     .then(data => res.json(data))
     .catch(err => {
         res.json(err);
@@ -46,7 +48,7 @@ app.post("/api/workouts/range", function (req, res){
 });
 
 app.get("/api/workouts/range", (req, res) => {
-    Workout.find({})
+    db.Workout.find({})
     .then(data => {
         res.send(data);
     })
